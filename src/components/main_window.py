@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-主窗口类
+Main Window Class
 """
 
 from PySide6.QtWidgets import (
@@ -16,78 +16,78 @@ import os
 
 
 class MainWindow(QMainWindow):
-    """主窗口类"""
+    """Main Window Class"""
     
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("VisionCompare - 图像对比工具")
+        self.setWindowTitle("VisionCompare - Image Comparison Tool")
         self.setGeometry(100, 100, 1200, 800)
         
-        # 初始化UI
+        # Initialize UI
         self.init_ui()
         
-        # 存储图像路径
+        # Store image paths
         self.image1_path = None
         self.image2_path = None
     
     def init_ui(self):
-        """初始化UI界面"""
-        # 创建中央部件
+        """Initialize UI interface"""
+        # Create central widget
         central_widget = QWidget()
         self.setCentralWidget(central_widget)
         
-        # 主布局
+        # Main layout
         main_layout = QVBoxLayout()
         central_widget.setLayout(main_layout)
         
-        # 按钮布局
+        # Button layout
         button_layout = QHBoxLayout()
         
-        # 加载图像按钮
-        self.load_image1_btn = QPushButton("加载第一张图像")
+        # Load image buttons
+        self.load_image1_btn = QPushButton("Load First Image")
         self.load_image1_btn.clicked.connect(self.load_image1)
         
-        self.load_image2_btn = QPushButton("加载第二张图像")
+        self.load_image2_btn = QPushButton("Load Second Image")
         self.load_image2_btn.clicked.connect(self.load_image2)
         
-        # 添加按钮到布局
+        # Add buttons to layout
         button_layout.addWidget(self.load_image1_btn)
         button_layout.addWidget(self.load_image2_btn)
         
-        # 图像显示区域
+        # Image display area
         self.image_viewer = ImageViewer()
         
-        # 添加控件到主布局
+        # Add widgets to main layout
         main_layout.addLayout(button_layout)
         main_layout.addWidget(self.image_viewer)
         
-        # 状态栏
-        self.statusBar().showMessage("就绪")
+        # Status bar
+        self.statusBar().showMessage("Ready")
     
     def load_image1(self):
-        """加载第一张图像"""
+        """Load the first image"""
         file_path, _ = QFileDialog.getOpenFileName(
             self, 
-            "选择第一张图像", 
+            "Select First Image", 
             "", 
-            "图像文件 (*.png *.jpg *.jpeg *.bmp *.gif)"
+            "Image Files (*.png *.jpg *.jpeg *.bmp *.gif)"
         )
         
         if file_path:
             self.image1_path = file_path
             self.image_viewer.set_image1(file_path)
-            self.statusBar().showMessage(f"已加载第一张图像: {os.path.basename(file_path)}")
+            self.statusBar().showMessage(f"Loaded first image: {os.path.basename(file_path)}")
     
     def load_image2(self):
-        """加载第二张图像"""
+        """Load the second image"""
         file_path, _ = QFileDialog.getOpenFileName(
             self, 
-            "选择第二张图像", 
+            "Select Second Image", 
             "", 
-            "图像文件 (*.png *.jpg *.jpeg *.bmp *.gif)"
+            "Image Files (*.png *.jpg *.jpeg *.bmp *.gif)"
         )
         
         if file_path:
             self.image2_path = file_path
             self.image_viewer.set_image2(file_path)
-            self.statusBar().showMessage(f"已加载第二张图像: {os.path.basename(file_path)}")
+            self.statusBar().showMessage(f"Loaded second image: {os.path.basename(file_path)}")

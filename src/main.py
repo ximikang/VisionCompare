@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-VisionCompare - 图像对比工具主程序
+VisionCompare - Image Comparison Tool Main Program
 """
 
 import sys
@@ -11,14 +11,14 @@ from components.main_window import MainWindow
 
 
 def main():
-    """主函数"""
+    """Main function"""
     app = QApplication(sys.argv)
     
-    # 创建主窗口
+    # Create main window
     window = MainWindow()
     window.show()
     
-    # 运行应用
+    # Run application
     sys.exit(app.exec())
 
 

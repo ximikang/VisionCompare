@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-图像查看器组件
+Image Viewer Component
 """
 
 from PySide6.QtWidgets import QWidget, QLabel, QHBoxLayout, QSizePolicy
@@ -13,45 +13,45 @@ import numpy as np
 
 
 class ImageViewer(QWidget):
-    """图像查看器"""
+    """Image Viewer"""
     
     def __init__(self):
         super().__init__()
         self.init_ui()
         
-        # 图像数据
+        # Image data
         self.pixmap1 = None
         self.pixmap2 = None
     
     def init_ui(self):
-        """初始化UI"""
+        """Initialize UI"""
         layout = QHBoxLayout()
         self.setLayout(layout)
         
-        # 创建两个标签用于显示图像
-        self.label1 = QLabel("请加载第一张图像")
+        # Create two labels for displaying images
+        self.label1 = QLabel("Please load the first image")
         self.label1.setAlignment(Qt.AlignCenter)
         self.label1.setMinimumSize(400, 300)
         self.label1.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         self.label1.setStyleSheet("border: 1px solid gray;")
         
-        self.label2 = QLabel("请加载第二张图像")
+        self.label2 = QLabel("Please load the second image")
         self.label2.setAlignment(Qt.AlignCenter)
         self.label2.setMinimumSize(400, 300)
         self.label2.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         self.label2.setStyleSheet("border: 1px solid gray;")
         
-        # 添加到布局
+        # Add to layout
         layout.addWidget(self.label1)
         layout.addWidget(self.label2)
     
     def set_image1(self, image_path):
-        """设置第一张图像"""
+        """Set the first image"""
         try:
             pixmap = QPixmap(image_path)
             self.pixmap1 = pixmap
             
-            # 缩放图像以适应标签大小
+            # Scale image to fit label size
             scaled_pixmap = pixmap.scaled(
                 self.label1.size(), 
                 Qt.KeepAspectRatio, 
@@ -61,15 +61,15 @@ class ImageViewer(QWidget):
             self.label1.setPixmap(scaled_pixmap)
             self.label1.setText("")
         except Exception as e:
-            self.label1.setText(f"加载图像失败: {str(e)}")
+            self.label1.setText(f"Failed to load image: {str(e)}")
     
     def set_image2(self, image_path):
-        """设置第二张图像"""
+        """Set the second image"""
         try:
             pixmap = QPixmap(image_path)
             self.pixmap2 = pixmap
             
-            # 缩放图像以适应标签大小
+            # Scale image to fit label size
             scaled_pixmap = pixmap.scaled(
                 self.label2.size(), 
                 Qt.KeepAspectRatio, 
@@ -79,4 +79,4 @@ class ImageViewer(QWidget):
             self.label2.setPixmap(scaled_pixmap)
             self.label2.setText("")
         except Exception as e:
-            self.label2.setText(f"加载图像失败: {str(e)}")
+            self.label2.setText(f"Failed to load image: {str(e)}")
